@@ -8,7 +8,7 @@ ENV PYTHONNUNBUFFERED 1
 WORKDIR /app
 
 # Instala as dependências
-COPY requirements.txt
+COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 # 5. Copie o código do seu projeto para dentro do container
