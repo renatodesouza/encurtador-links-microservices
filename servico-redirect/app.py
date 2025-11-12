@@ -1,4 +1,4 @@
-from flask import flask, redirect, abort
+from flask import Flask, redirect, abort
 import requests
 import os
 
