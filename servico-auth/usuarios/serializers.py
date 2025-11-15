@@ -10,7 +10,7 @@ class UserRegisterSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         # Cria o usuário com o password "hash" (criptografado)
-        user = user.objects.create_user(
+        user = User.objects.create_user(
             username=validated_data['username'],
             password=validated_data['password']
         )
