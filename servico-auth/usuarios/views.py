@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.contrib.auth.models import User
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import generics, status
+from .serializers import UserRegisterSerializer
 
 @api_view(['GET'])
 def health_check(request):
@@ -13,4 +15,11 @@ def health_check(request):
         status=status.HTTP_200_OK
     )
 
-# Create your views here.
+# Nova view registro de usuário
+class UserRegisterView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserRegisterSerializer
+    # Não precisa de autenticação para registra
+    permission_classes = []
+
+
