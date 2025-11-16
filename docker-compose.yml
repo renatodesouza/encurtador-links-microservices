@@ -11,10 +11,10 @@ services:
       - "8000"
 
     environment:
-      - DB_HOST=db-auth
-      - DB_NAME=auth_db
-      - DB_USER=auth_user
-      - DB_PASS=auth_pass
+      DB_HOST: db-auth
+      DB_NAME: auth_db
+      DB_USER: auth_user
+      DB_PASS: auth_pass
     depends_on:
       - db-auth
 
@@ -27,10 +27,10 @@ services:
     expose:
       - "8000"
     environment:
-      - DB_HOST=db-links
-      - DB_NAME=links_db
-      - DB_USER=links_user
-      - DB_PASS=links_pass
+      DB_HOST: db-links
+      DB_NAME: links_db
+      DB_USER: links_user
+      DB_PASS: links_pass
     depends_on:
       - db-links
 
@@ -47,7 +47,7 @@ services:
   gateway:
     image: nginx:latest
     ports:
-      - "80:80" # A ÚNICA porta pública
+      - "8080:80" # A ÚNICA porta pública
     volumes:
       - ./gateway/nginx.conf:/etc/nginx/nginx.conf
     depends_on:
@@ -67,17 +67,17 @@ services:
       - "5432"
 
   db-links:
-    image: postgres:15-15-alpine
-  volumes:
-    - postgres_links_data:/var/lib/postgresql/data
-  environment:
-    - POSTGRES_DB=links_db
-    - POSTGRES_USER=links_user
-    - POSTGRES_PASSWORD=links_pass
-  expose:
-    - "5432"
+    image: postgres:15-alpine
+    volumes:
+      - postgres_links_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=links_db
+      - POSTGRES_USER=links_user
+      - POSTGRES_PASSWORD=links_pass
+    expose:
+      - "5432"
 
-# Novos volumes para persistência
+  # Novos volumes para persistência
 volumes:
   postgres_auth_data:
   postgres_links_data:
